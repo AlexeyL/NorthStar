@@ -1,0 +1,42 @@
+services:
+  # PostgreSQL Database
+  - type: pserv
+    name: northstar-db
+    env: node
+    plan: free
+    databaseName: northstar_db
+    databaseUser: northstar_user
+
+  # Backend API Service
+  - type: web
+    name: northstar-api
+    env: node
+    plan: free
+    buildCommand: cd packages/backend && npm install && npm run build && npx prisma generate && npx prisma db push
+    startCommand: cd packages/backend && npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: northstar-db
+          property: connectionString
+      - key: CORS_ORIGIN
+        fromService:
+          type: web
+          name: northstar-frontend
+          property: host
+
+  # Frontend Web Service
+  - type: web
+    name: northstar-frontend
+    env: static
+    plan: free
+    buildCommand: cd packages/frontend && npm install && npm run build
+    staticPublishPath: packages/frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
