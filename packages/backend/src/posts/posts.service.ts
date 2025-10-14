@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ForbiddenException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -7,9 +7,12 @@ import { UpdatePostDto } from './dto/update-post.dto';
 export class PostsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createPostDto: CreatePostDto) {
+  async create(createPostDto: CreatePostDto, userId: string) {
     return this.prisma.post.create({
-      data: createPostDto,
+      data: {
+        ...createPostDto,
+        authorId: userId,
+      },
       include: {
         author: true,
       },
@@ -36,7 +39,35 @@ export class PostsService {
     });
   }
 
-  async update(id: string, updatePostDto: UpdatePostDto) {
+  async update(id: string, updatePostDto: UpdatePostDto, userId: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    // Check if user is the author or has admin/moderator role
+    if (post.authorId !== userId) {
+      // Check if user has admin or moderator role
+      const user = await this.prisma.user.findUnique({
+        where: { id: userId },
+        include: {
+          userRoles: {
+            include: {
+              role: true,
+            },
+          },
+        },
+      });
+
+      const userRoles = user?.userRoles.map(ur => ur.role.name) || [];
+      if (!userRoles.includes('admin') && !userRoles.includes('moderator')) {
+        throw new ForbiddenException('You can only update your own posts');
+      }
+    }
+
     return this.prisma.post.update({
       where: { id },
       data: updatePostDto,
@@ -46,7 +77,35 @@ export class PostsService {
     });
   }
 
-  async remove(id: string) {
+  async remove(id: string, userId: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    // Check if user is the author or has admin/moderator role
+    if (post.authorId !== userId) {
+      // Check if user has admin or moderator role
+      const user = await this.prisma.user.findUnique({
+        where: { id: userId },
+        include: {
+          userRoles: {
+            include: {
+              role: true,
+            },
+          },
+        },
+      });
+
+      const userRoles = user?.userRoles.map(ur => ur.role.name) || [];
+      if (!userRoles.includes('admin') && !userRoles.includes('moderator')) {
+        throw new ForbiddenException('You can only delete your own posts');
+      }
+    }
+
     return this.prisma.post.delete({
       where: { id },
     });
