@@ -7,6 +7,11 @@ export class CreateUserDto {
   @IsNotEmpty()
   email: string;
 
+  @ApiProperty({ example: 'strongPassword123' })
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
   @ApiProperty({ example: 'John Doe', required: false })
   @IsString()
   @IsOptional()
