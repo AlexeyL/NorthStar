@@ -1,5 +1,6 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from "@vitejs/plugin-react";
+import * as path from "path";
+import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -7,13 +8,21 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
+      "/api": {
+        target: "http://localhost:3001",
         changeOrigin: true,
       },
     },
   },
   build: {
-    outDir: 'dist',
+    outDir: "dist",
   },
-})
+  resolve: {
+    alias: {
+      "@features": path.resolve(__dirname, "src/features"),
+      "@pages": path.resolve(__dirname, "src/pages"),
+      "@api": path.resolve(__dirname, "src/api"),
+      "@store": path.resolve(__dirname, "src/store"),
+    },
+  },
+});

@@ -1,7 +1,7 @@
+import { Badge, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import React from 'react';
-import { Paper, Title, Text, Group, Badge, Stack } from '@mantine/core';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { type RootState } from '../../store/store';
 import LogoutButton from './LogoutButton';
 
 const UserProfile: React.FC = () => {

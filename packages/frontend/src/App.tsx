@@ -1,19 +1,12 @@
-import { Routes, Route } from 'react-router-dom'
-import { AppShell, Burger, Group, Text, NavLink, Button } from '@mantine/core'
+import { AppShell, Burger, Button, Group, NavLink, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconHome, IconUsers, IconFileText, IconUser, IconLogin } from '@tabler/icons-react'
-import { Link, useLocation } from 'react-router-dom'
+import type { RootState } from '@store/store'
+import { IconFileText, IconHome, IconLogin, IconUser, IconUsers } from '@tabler/icons-react'
 import { useSelector } from 'react-redux'
-import { RootState } from './store/store'
-import HomePage from './pages/HomePage'
-import UsersPage from './pages/UsersPage'
-import PostsPage from './pages/PostsPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import ProfilePage from './pages/ProfilePage'
-import UnauthorizedPage from './pages/UnauthorizedPage'
-import ProtectedRoute from './components/auth/ProtectedRoute'
+import { Link, useLocation } from 'react-router-dom'
 import LogoutButton from './components/auth/LogoutButton'
+import { AppRouter } from './features'
+
 
 function App() {
   const [opened, { toggle }] = useDisclosure()
@@ -29,6 +22,8 @@ function App() {
   const authNavigation = [
     { icon: IconUser, label: 'Profile', href: '/profile' },
   ]
+
+  console.log('User:', user);
 
   return (
     <AppShell
@@ -48,7 +43,7 @@ function App() {
               NorthStar
             </Text>
           </Group>
-          
+
           <Group>
             {isAuthenticated ? (
               <>
@@ -78,7 +73,7 @@ function App() {
             onClick={() => toggle()}
           />
         ))}
-        
+
         {isAuthenticated && (
           <>
             <Text size="sm" fw={500} mt="md" mb="xs" c="dimmed">
@@ -100,39 +95,40 @@ function App() {
       </AppShell.Navbar>
 
       <AppShell.Main>
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/unauthorized" element={<UnauthorizedPage />} />
-          
-          <Route 
-            path="/users" 
+
+          <Route
+            path="/users"
             element={
-              <ProtectedRoute requiredRoles={['user', 'admin', 'moderator']}>
+              <ProtectedRoute requiredRoles={['user', 'admin', 'moderator']} isPublic={false}>
                 <UsersPage />
               </ProtectedRoute>
-            } 
+            }
           />
-          
-          <Route 
-            path="/posts" 
+
+          <Route
+            path="/posts"
             element={
-              <ProtectedRoute requiredRoles={['user', 'admin', 'moderator']}>
+              <ProtectedRoute requiredRoles={['user', 'admin', 'moderator']} isPublic={false}>
                 <PostsPage />
               </ProtectedRoute>
-            } 
+            }
           />
-          
-          <Route 
-            path="/profile" 
+
+          <Route
+            path="/profile"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute isPublic={false}>
                 <ProfilePage />
               </ProtectedRoute>
-            } 
+            }
           />
-        </Routes>
+        </Routes> */}
+        <AppRouter />
       </AppShell.Main>
     </AppShell>
   )
