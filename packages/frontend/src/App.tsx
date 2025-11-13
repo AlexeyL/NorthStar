@@ -4,8 +4,8 @@ import type { RootState } from '@store/store'
 import { IconFileText, IconHome, IconLogin, IconUser, IconUsers } from '@tabler/icons-react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import LogoutButton from './components/auth/LogoutButton'
 import { AppRouter } from './features'
+import LogoutButton from './features/auth/components/LogoutButton'
 
 
 function App() {
@@ -95,39 +95,6 @@ function App() {
       </AppShell.Navbar>
 
       <AppShell.Main>
-        {/* <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/unauthorized" element={<UnauthorizedPage />} />
-
-          <Route
-            path="/users"
-            element={
-              <ProtectedRoute requiredRoles={['user', 'admin', 'moderator']} isPublic={false}>
-                <UsersPage />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/posts"
-            element={
-              <ProtectedRoute requiredRoles={['user', 'admin', 'moderator']} isPublic={false}>
-                <PostsPage />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute isPublic={false}>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-        </Routes> */}
         <AppRouter />
       </AppShell.Main>
     </AppShell>

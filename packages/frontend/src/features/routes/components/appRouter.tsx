@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
 import { usePageRoutes } from "../hooks/usePageRoutes";
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./protectedRoute";
 
 export default function AppRouter() {
     const allRoutes = usePageRoutes();

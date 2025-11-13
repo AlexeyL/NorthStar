@@ -1,21 +1,20 @@
-import React from 'react';
-import { useForm } from '@mantine/form';
-import { 
-  TextInput, 
-  PasswordInput, 
-  Button, 
-  Paper, 
-  Title, 
-  Stack, 
-  Alert,
+import {
   Anchor,
-  Group
+  Button,
+  Group,
+  Paper,
+  PasswordInput,
+  Stack,
+  TextInput,
+  Title
 } from '@mantine/core';
-import { useLoginMutation } from '../../api/authApi';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '../../store/authSlice';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLoginMutation } from '../../../api/authApi';
+import { setCredentials } from '../../../store/authSlice';
 
 interface LoginFormProps {
   onSwitchToRegister?: () => void;
@@ -46,7 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
         accessToken: result.accessToken,
         refreshToken: result.refreshToken,
       }));
-      
+
       notifications.show({
         title: 'Success',
         message: 'Logged in successfully!',

@@ -1,6 +1,6 @@
-import React from 'react';
 import { Container } from '@mantine/core';
-import UserProfile from '../components/auth/UserProfile';
+import React from 'react';
+import UserProfile from '../features/auth/components/UserProfile';
 
 const ProfilePage: React.FC = () => {
   return (

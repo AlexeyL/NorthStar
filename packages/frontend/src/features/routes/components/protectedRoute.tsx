@@ -1,15 +1,10 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { type RootState } from '../../../store/store';
 import type { ProtectedRouteProps } from '../types/protectedRouteProps.type';
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
-  children,
-  requiredRoles = [],
-  requiredPermissions = [],
-  isPublic
-}) => {
+export default function ProtectedRoute(props: ProtectedRouteProps) {
+  const { children, requiredRoles = [], requiredPermissions = [], isPublic } = props;
   const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
   const location = useLocation();
 
@@ -35,4 +30,3 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   return <>{children}</>;
 };
 
-export default ProtectedRoute;

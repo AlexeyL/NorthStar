@@ -1,10 +1,10 @@
-import React from 'react';
 import { Button } from '@mantine/core';
-import { useLogoutMutation } from '../../api/authApi';
-import { useDispatch } from 'react-redux';
-import { clearCredentials } from '../../store/authSlice';
-import { useNavigate } from 'react-router-dom';
 import { notifications } from '@mantine/notifications';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../../../api/authApi';
+import { clearCredentials } from '../../../store/authSlice';
 
 const LogoutButton: React.FC = () => {
   const [logout, { isLoading }] = useLogoutMutation();
@@ -29,9 +29,9 @@ const LogoutButton: React.FC = () => {
   };
 
   return (
-    <Button 
-      variant="outline" 
-      onClick={handleLogout} 
+    <Button
+      variant="outline"
+      onClick={handleLogout}
       loading={isLoading}
     >
       Logout

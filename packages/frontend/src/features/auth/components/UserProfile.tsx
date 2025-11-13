@@ -1,7 +1,7 @@
 import { Badge, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { type RootState } from '../../store/store';
+import { type RootState } from '../../../store/store';
 import LogoutButton from './LogoutButton';
 
 const UserProfile: React.FC = () => {
@@ -16,25 +16,25 @@ const UserProfile: React.FC = () => {
       <Title order={2} mb="md">
         Profile
       </Title>
-      
+
       <Stack gap="md">
         <Group>
           <Text fw={500}>Name:</Text>
           <Text>{user.name || 'Not provided'}</Text>
         </Group>
-        
+
         <Group>
           <Text fw={500}>Email:</Text>
           <Text>{user.email}</Text>
         </Group>
-        
+
         <Group>
           <Text fw={500}>Status:</Text>
           <Badge color={user.isActive ? 'green' : 'red'}>
             {user.isActive ? 'Active' : 'Inactive'}
           </Badge>
         </Group>
-        
+
         <Group>
           <Text fw={500}>Roles:</Text>
           <Group gap="xs">
@@ -45,12 +45,12 @@ const UserProfile: React.FC = () => {
             ))}
           </Group>
         </Group>
-        
+
         <Group>
           <Text fw={500}>Member since:</Text>
           <Text>{new Date(user.createdAt).toLocaleDateString()}</Text>
         </Group>
-        
+
         <Group mt="md">
           <LogoutButton />
         </Group>

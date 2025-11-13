@@ -1,6 +1,6 @@
+import { Center, Container } from '@mantine/core';
 import React from 'react';
-import { Container, Center } from '@mantine/core';
-import RegisterForm from '../components/auth/RegisterForm';
+import RegisterForm from '../features/auth/components/RegisterForm';
 
 const RegisterPage: React.FC = () => {
   return (

@@ -1,20 +1,20 @@
-import React from 'react';
-import { useForm } from '@mantine/form';
-import { 
-  TextInput, 
-  PasswordInput, 
-  Button, 
-  Paper, 
-  Title, 
-  Stack, 
+import {
   Anchor,
-  Group
+  Button,
+  Group,
+  Paper,
+  PasswordInput,
+  Stack,
+  TextInput,
+  Title
 } from '@mantine/core';
-import { useRegisterMutation } from '../../api/authApi';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '../../store/authSlice';
-import { useNavigate, Link } from 'react-router-dom';
+import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRegisterMutation } from '../../../api/authApi';
+import { setCredentials } from '../../../store/authSlice';
 
 const RegisterForm: React.FC = () => {
   const [register, { isLoading }] = useRegisterMutation();
@@ -32,7 +32,7 @@ const RegisterForm: React.FC = () => {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
       name: (value) => (value.length < 2 ? 'Name must be at least 2 characters' : null),
       password: (value) => (value.length < 6 ? 'Password must be at least 6 characters' : null),
-      confirmPassword: (value, values) => 
+      confirmPassword: (value, values) =>
         value !== values.password ? 'Passwords do not match' : null,
     },
   });
@@ -46,7 +46,7 @@ const RegisterForm: React.FC = () => {
         accessToken: result.accessToken,
         refreshToken: result.refreshToken,
       }));
-      
+
       notifications.show({
         title: 'Success',
         message: 'Account created successfully!',
