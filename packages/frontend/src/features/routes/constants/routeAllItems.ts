@@ -1,4 +1,4 @@
-import { routeMenuItems } from "./routeMenuItems";
-import { routeOnlyItems } from "./routeOnlyItems";
+import { routeMenuItems } from './routeMenuItems';
+import { routeOnlyItems } from './routeOnlyItems';
 
-export const routeAllItems = [...routeMenuItems, ...routeOnlyItems]
+export const routeAllItems = [...routeMenuItems, ...routeOnlyItems];

@@ -1,31 +1,30 @@
-
-import { useMemo } from "react";
-import { Route, Routes } from "react-router-dom";
-import { usePageRoutes } from "../hooks/usePageRoutes";
-import ProtectedRoute from "./protectedRoute";
+import { useMemo } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { usePageRoutes } from '../hooks/usePageRoutes';
+import ProtectedRoute from './protectedRoute';
 
 export default function AppRouter() {
-    const allRoutes = usePageRoutes();
+	const allRoutes = usePageRoutes();
 
-    const routes = useMemo(() => allRoutes.map((route) =>
-        <Route
-            key={route.path}
-            path={route.path}
-            element={
-                <ProtectedRoute
-                    isPublic={route.isPublic}
-                    requiredRoles={route.requiredRoles}
-                    requiredPermissions={route.requiredPermissions}
-                >
-                    <route.page />
-                </ProtectedRoute>
-            }
-        />
-    ), [allRoutes]);
+	const routes = useMemo(
+		() =>
+			allRoutes.map((route) => (
+				<Route
+					key={route.path}
+					path={route.path}
+					element={
+						<ProtectedRoute
+							isPublic={route.isPublic}
+							requiredRoles={route.requiredRoles}
+							requiredPermissions={route.requiredPermissions}
+						>
+							<route.page />
+						</ProtectedRoute>
+					}
+				/>
+			)),
+		[allRoutes],
+	);
 
-    return (
-        <Routes>
-            {routes}
-        </Routes>
-    )
+	return <Routes>{routes}</Routes>;
 }

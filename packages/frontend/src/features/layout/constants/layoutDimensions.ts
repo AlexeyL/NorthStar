@@ -1,0 +1,6 @@
+export const layoutDimensions = {
+	HEADER_HEIGHT: 80,
+	FOOTER_HEIGHT: 40,
+	APP_SHELL_PADDING: 10,
+	APP_SHELL_FOOTER_PADDING: 10,
+};

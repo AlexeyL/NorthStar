@@ -1,23 +1,24 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import { MantineProvider } from '@mantine/core'
-import { Notifications } from '@mantine/notifications'
-import { store } from './store/store'
-import App from './App'
-import '@mantine/core/styles.css'
-import '@mantine/notifications/styles.css'
+import { MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
+import { Notifications } from '@mantine/notifications';
+import '@mantine/notifications/styles.css';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import { store } from './store/store';
+import { theme } from './theme';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <MantineProvider>
-          <Notifications />
-          <App />
-        </MantineProvider>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
-)
+	<React.StrictMode>
+		<Provider store={store}>
+			<BrowserRouter>
+				<MantineProvider theme={theme}>
+					<Notifications />
+					<App />
+				</MantineProvider>
+			</BrowserRouter>
+		</Provider>
+	</React.StrictMode>,
+);

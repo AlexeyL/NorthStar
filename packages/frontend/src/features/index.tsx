@@ -1,1 +1,4 @@
-export { default as AppRouter } from './routes/components/appRouter';
+export * from "./auth";
+export * from "./layout";
+export * from "./routes";
+

@@ -35,6 +35,12 @@
             "@pages": [
                 "pages/index.ts"
             ],
+            "@utils/*": [
+                "utils/*"
+            ],
+            "@utils": [
+                "utils/index.ts"
+            ],
             "@api/*": [
                 "api/*"
             ],
