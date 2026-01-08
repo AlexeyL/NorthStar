@@ -1,19 +1,8 @@
-import {
-	Box,
-	Button,
-	Collapse,
-	Menu,
-	NavLink,
-	useMantineTheme,
-} from '@mantine/core';
+import { Box, Button, Collapse, Menu, NavLink, useMantineTheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { clearCredentials } from '@store/authSlice';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import {
-	IconChevronDown,
-	IconLogout,
-	IconTriangleInvertedFilled,
-} from '@tabler/icons-react';
+import { IconChevronDown, IconLogout, IconTriangleInvertedFilled } from '@tabler/icons-react';
 import { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -48,14 +37,9 @@ export default function UserMenu() {
 					<Menu>
 						<Menu.Target>
 							<Button
-								c="white"
+								c="primary"
 								variant="transparent"
-								rightSection={
-									<IconTriangleInvertedFilled
-										size={10}
-										color="white"
-									/>
-								}
+								rightSection={<IconTriangleInvertedFilled size={10} color="var(--mantine-color-primary-6)" />}
 							>
 								{userName}
 							</Button>
@@ -64,9 +48,10 @@ export default function UserMenu() {
 						<Menu.Dropdown w={200}>
 							{userMenuItems.map((item) => (
 								<Menu.Item
+									color="var(--mantine-color-primary-6)"
 									key={item.label?.toString()}
 									onClick={item.onClick}
-									rightSection={<item.icon size={14} />}
+									rightSection={<item.icon size={14} color="var(--mantine-color-primary-6)" />}
 								>
 									{item.label}
 								</Menu.Item>
@@ -92,9 +77,7 @@ export default function UserMenu() {
 								color={theme.colors.primary[6]}
 								size={16}
 								style={{
-									transform: linksOpened
-										? 'rotate(180deg)'
-										: 'rotate(0deg)',
+									transform: linksOpened ? 'rotate(180deg)' : 'rotate(0deg)',
 									transition: 'transform 0.2s ease',
 								}}
 							/>
@@ -106,12 +89,7 @@ export default function UserMenu() {
 								key={item.label?.toString()}
 								label={item.label}
 								onClick={item.onClick}
-								rightSection={
-									<item.icon
-										size={16}
-										color={theme.colors.primary[6]}
-									/>
-								}
+								rightSection={<item.icon size={16} color={theme.colors.primary[6]} />}
 							/>
 						))}
 					</Collapse>
@@ -125,12 +103,8 @@ export default function UserMenu() {
 		<>
 			{user && (
 				<>
-					<Box visibleFrom="sm">
-						{buildUserMenu(`${user.name} ${user.email}`)}
-					</Box>
-					<Box hiddenFrom="sm">
-						{buildSmallScreenUserMenu(`${user.name} ${user.email}`)}
-					</Box>
+					<Box visibleFrom="sm">{buildUserMenu(`${user.name}`)}</Box>
+					<Box hiddenFrom="sm">{buildSmallScreenUserMenu(`${user.name}`)}</Box>
 				</>
 			)}
 		</>

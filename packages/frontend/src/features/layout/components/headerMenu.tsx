@@ -20,15 +20,11 @@ import { IconChevronDown } from '@tabler/icons-react';
 import { useCallback, useState } from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 
-export default function HeaderMenu({
-	onMenuClick,
-}: {
-	onMenuClick?: () => void;
-}) {
+export default function HeaderMenu({ onMenuClick }: { onMenuClick?: () => void }) {
 	const [opened, setOpened] = useState(false);
 	const theme = useMantineTheme();
-	const redColor = theme.colors.red[6];
-	const menuColor = theme.colors.gray[1];
+	const accentColor = theme.colors.accent[6];
+	const menuColor = theme.colors.primary[6];
 	const menuRoutes = useMenuRoutes();
 	const [openLinks, setOpenLinks] = useState<{ [key: string]: boolean }>({});
 
@@ -48,7 +44,7 @@ export default function HeaderMenu({
 				component={RouterNavLink}
 				to={child.path}
 				description={<>{child.description ?? ''}</>}
-				leftSection={child.icon && <child.icon color={redColor} />}
+				leftSection={child.icon && <child.icon color={accentColor} />}
 			/>
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 		),
@@ -59,14 +55,7 @@ export default function HeaderMenu({
 		switch (item.type) {
 			case RouteItemType.MENU_HEADER:
 				return (
-					<Button
-						key={item.title}
-						size="compact-sm"
-						component={RouterNavLink}
-						to={item.path}
-						c={menuColor}
-						variant="transparent"
-					>
+					<Button key={item.title} size="compact-sm" component={RouterNavLink} to={item.path} c={menuColor} variant="transparent">
 						<>{item.title}</>
 					</Button>
 				);
@@ -83,12 +72,7 @@ export default function HeaderMenu({
 						key={item.title}
 					>
 						<PopoverTarget>
-							<Button
-								onClick={() => setOpened((o) => !o)}
-								size="compact-sm"
-								c={menuColor}
-								variant="transparent"
-							>
+							<Button onClick={() => setOpened((o) => !o)} size="compact-sm" c={menuColor} variant="transparent">
 								<>{item.title}</>
 							</Button>
 						</PopoverTarget>
@@ -96,9 +80,7 @@ export default function HeaderMenu({
 						<PopoverDropdown p={0}>
 							<Stack gap={0} w={600}>
 								<Group p="md" gap={'xs'}>
-									{item.icon && (
-										<item.icon color={redColor} size={18} />
-									)}
+									{item.icon && <item.icon color={accentColor} size={18} />}
 									<Title order={6}>
 										<>{item.title}</>
 									</Title>
@@ -115,8 +97,7 @@ export default function HeaderMenu({
 										p="xs"
 										bg={'var(--mantine-color-gray-0'}
 										style={{
-											borderTop:
-												'1px solid var(--mantine-color-gray-3',
+											borderTop: '1px solid var(--mantine-color-gray-3',
 										}}
 									>
 										<Text c="dimmed" size="xs">
@@ -158,9 +139,7 @@ export default function HeaderMenu({
 									color={theme.colors.primary[6]}
 									size={16}
 									style={{
-										transform: openLinks[item.title]
-											? 'rotate(180deg)'
-											: 'rotate(0deg)',
+										transform: openLinks[item.title] ? 'rotate(180deg)' : 'rotate(0deg)',
 										transition: 'transform 0.2s ease',
 									}}
 								/>
@@ -175,11 +154,7 @@ export default function HeaderMenu({
 									component={RouterNavLink}
 									to={child.path}
 									description={<>{child.description ?? ''}</>}
-									leftSection={
-										child.icon && (
-											<child.icon color={redColor} />
-										)
-									}
+									leftSection={child.icon && <child.icon color={accentColor} />}
 								/>
 							))}
 						</Collapse>
