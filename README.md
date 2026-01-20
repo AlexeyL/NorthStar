@@ -20,55 +20,61 @@ This monorepo contains two main packages:
 ### Local Development Setup
 
 1. **Clone and install dependencies:**
-   ```bash
-   git clone <your-repo-url>
-   cd NorthStar
-   npm install
-   ```
+
+    ```bash
+    git clone <your-repo-url>
+    cd NorthStar
+    npm install
+    ```
 
 2. **Set up PostgreSQL:**
-   
-   **Option A: Using Docker (Recommended for local development)**
-   ```bash
-   # Start PostgreSQL in Docker
-   npm run docker:db:up
-   
-   # Copy the pre-configured Docker environment
-   cd packages/backend
-   cp .env.local .env
-   ```
-   
-   **Option B: Using existing PostgreSQL**
-   ```bash
-   cd packages/backend
-   cp .env.example .env
-   # Edit .env with your database connection string
-   ```
+
+    **Option A: Using Docker (Recommended for local development)**
+
+    ```bash
+    # Start PostgreSQL in Docker
+    npm run docker:db:up
+
+    # Copy the pre-configured Docker environment
+    cd packages/backend
+    cp .env.local .env
+    ```
+
+    **Option B: Using existing PostgreSQL**
+
+    ```bash
+    cd packages/backend
+    cp .env.example .env
+    # Edit .env with your database connection string
+    ```
 
 3. **Set up the database:**
-   ```bash
-   # From the root directory
-   npm run db:generate  # Generate Prisma client
-   npm run db:push      # Push schema to database
-   npm run db:seed      # Seed with sample data (optional)
-   ```
+
+    ```bash
+    # From the root directory
+    npm run db:generate  # Generate Prisma client
+    npm run db:push      # Push schema to database
+    npm run db:seed      # Seed with sample data (optional)
+    ```
 
 4. **Start development servers:**
-   ```bash
-   # From the root directory
-   npm run dev  # Starts both backend and frontend
-   ```
 
-   Or start them separately:
-   ```bash
-   npm run dev:backend   # Backend on http://localhost:3001
-   npm run dev:frontend  # Frontend on http://localhost:5173
-   ```
+    ```bash
+    # From the root directory
+    npm run dev  # Starts both backend and frontend
+    ```
+
+    Or start them separately:
+
+    ```bash
+    npm run dev:backend   # Backend on http://localhost:3001
+    npm run dev:frontend  # Frontend on http://localhost:5173
+    ```
 
 5. **Access the applications:**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:3001/api
-   - API Documentation: http://localhost:3001/api/docs
+    - Frontend: http://localhost:5173
+    - Backend API: http://localhost:3001/api
+    - API Documentation: http://localhost:3001/api/docs
 
 ## 📦 Available Scripts
 
@@ -85,7 +91,7 @@ This monorepo contains two main packages:
 ### Docker Scripts (for local PostgreSQL)
 
 - `npm run docker:db:up` - Start PostgreSQL container
-- `npm run docker:db:down` - Stop PostgreSQL container  
+- `npm run docker:db:down` - Stop PostgreSQL container
 - `npm run docker:setup` - Start PostgreSQL and setup database
 - `npm run docker:pgadmin` - Start pgAdmin (database management UI)
 
@@ -108,20 +114,22 @@ This monorepo contains two main packages:
 For local development without installing PostgreSQL:
 
 1. **Start PostgreSQL container:**
-   ```bash
-   npm run docker:db:up
-   ```
+
+    ```bash
+    npm run docker:db:up
+    ```
 
 2. **Use the pre-configured environment:**
-   ```bash
-   cd packages/backend
-   cp .env.local .env
-   ```
+
+    ```bash
+    cd packages/backend
+    cp .env.local .env
+    ```
 
 3. **Setup database:**
-   ```bash
-   npm run db:generate && npm run db:push
-   ```
+    ```bash
+    npm run db:generate && npm run db:push
+    ```
 
 See [docker-setup.md](./docker-setup.md) for detailed Docker setup instructions.
 
@@ -139,48 +147,52 @@ This project is configured for easy deployment on Render using the included `ren
 ### Automatic Deployment
 
 1. **Connect your repository to Render:**
-   - Go to [Render Dashboard](https://dashboard.render.com)
-   - Click "New" → "Blueprint"
-   - Connect your GitHub repository
-   - Render will automatically detect the `render.yaml` file
+    - Go to [Render Dashboard](https://dashboard.render.com)
+    - Click "New" → "Blueprint"
+    - Connect your GitHub repository
+    - Render will automatically detect the `render.yaml` file
 
 2. **The blueprint will create:**
-   - PostgreSQL database
-   - Backend web service
-   - Frontend static site
+    - PostgreSQL database
+    - Backend web service
+    - Frontend static site
 
 3. **Environment variables are automatically configured:**
-   - Database connection string
-   - CORS settings
-   - Production environment
+    - Database connection string
+    - CORS settings
+    - Production environment
 
 ### Manual Deployment
 
 If you prefer manual deployment:
 
 #### Backend Deployment
+
 1. Create a new Web Service on Render
 2. Connect your repository
 3. Set build command: `cd packages/backend && npm install && npm run build && npx prisma generate && npx prisma db push`
 4. Set start command: `cd packages/backend && npm run start:prod`
 5. Add environment variables:
-   - `NODE_ENV=production`
-   - `DATABASE_URL` (from your PostgreSQL service)
-   - `CORS_ORIGIN` (your frontend URL)
+    - `NODE_ENV=production`
+    - `DATABASE_URL` (from your PostgreSQL service)
+    - `CORS_ORIGIN` (your frontend URL)
 
 #### Frontend Deployment
+
 1. Create a new Static Site on Render
 2. Connect your repository
 3. Set build command: `cd packages/frontend && npm install && npm run build`
 4. Set publish directory: `packages/frontend/dist`
 
 #### Database Setup
+
 1. Create a PostgreSQL service on Render
 2. Note the connection string for your backend environment variables
 
 ## 🛠️ Technology Stack
 
 ### Backend
+
 - **NestJS** - Progressive Node.js framework
 - **Prisma** - Next-generation ORM
 - **PostgreSQL** - Relational database
@@ -188,6 +200,7 @@ If you prefer manual deployment:
 - **TypeScript** - Type safety
 
 ### Frontend
+
 - **React 18** - UI library
 - **TypeScript** - Type safety
 - **Vite** - Build tool and dev server
@@ -196,6 +209,7 @@ If you prefer manual deployment:
 - **React Router** - Client-side routing
 
 ### Development Tools
+
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
 - **Concurrently** - Run multiple commands
@@ -234,6 +248,7 @@ NorthStar/
 ### Environment Variables
 
 #### Backend (.env)
+
 ```env
 DATABASE_URL="postgresql://username:password@localhost:5432/northstar_db?schema=public"
 PORT=3001
@@ -242,27 +257,28 @@ CORS_ORIGIN=http://localhost:5173
 ```
 
 #### Frontend
+
 The frontend automatically proxies API requests to the backend during development via Vite configuration.
 
 ## 🧪 Development Tips
 
 1. **Database Management:**
-   - Use `npm run db:studio` to open Prisma Studio for database management
-   - Run `npm run db:push` after schema changes during development
-   - Use `npm run db:migrate` for production-ready migrations
+    - Use `npm run db:studio` to open Prisma Studio for database management
+    - Run `npm run db:push` after schema changes during development
+    - Use `npm run db:migrate` for production-ready migrations
 
 2. **API Documentation:**
-   - Swagger docs are available at `/api/docs` in development
-   - All endpoints are documented with proper DTOs and responses
+    - Swagger docs are available at `/api/docs` in development
+    - All endpoints are documented with proper DTOs and responses
 
 3. **Type Safety:**
-   - Backend uses Prisma-generated types
-   - Frontend uses shared TypeScript interfaces
-   - RTK Query provides automatic type inference
+    - Backend uses Prisma-generated types
+    - Frontend uses shared TypeScript interfaces
+    - RTK Query provides automatic type inference
 
 4. **Hot Reload:**
-   - Both backend and frontend support hot reload during development
-   - Changes are reflected immediately without manual restarts
+    - Both backend and frontend support hot reload during development
+    - Changes are reflected immediately without manual restarts
 
 ## 🤝 Contributing
 

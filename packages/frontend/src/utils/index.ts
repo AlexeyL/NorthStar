@@ -1,1 +1,1 @@
-export * from "./mediaQuery/useBreakpoinBelow";
+export * from './mediaQuery/useBreakpoinBelow';

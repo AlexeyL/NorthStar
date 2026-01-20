@@ -11,10 +11,10 @@ export default function Header() {
 
 	const headerLogo = useMemo(() => {
 		return (
-			<Anchor href="/" style={{ cursor: 'pointer', textDecoration: 'none' }}>
+			<Anchor href='/' style={{ cursor: 'pointer', textDecoration: 'none' }}>
 				<Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-					<Image src={logo} alt="Aptivor logo" height={50} />
-					<Text c="primary">Aptivor</Text>
+					<Image src={logo} alt='Aptivor logo' height={50} />
+					<Text c='primary'>Aptivor</Text>
 				</Box>
 			</Anchor>
 		);
@@ -23,10 +23,10 @@ export default function Header() {
 	const buildHeader = useMemo(() => {
 		return (
 			<>
-				<Group pb={'sm'} gap={'xs'} visibleFrom="sm">
+				<Group pb={'sm'} gap={'xs'} visibleFrom='sm'>
 					<HeaderMenu />
 				</Group>
-				<Box pb={'sm'} visibleFrom="sm">
+				<Box pb={'sm'} visibleFrom='sm'>
 					<UserMenu />
 				</Box>
 			</>
@@ -36,31 +36,31 @@ export default function Header() {
 	const buildSmallScreenHeader = useMemo(() => {
 		return (
 			<>
-				<Center h="100%" hiddenFrom="sm">
-					<Burger color="primary" opened={drawerOpened} onClick={toggleDrawer} />
+				<Center h='100%' hiddenFrom='sm'>
+					<Burger color='primary' opened={drawerOpened} onClick={toggleDrawer} />
 				</Center>
 				<Drawer
-					hiddenFrom="sm"
+					hiddenFrom='sm'
 					opened={drawerOpened}
 					onClose={closeDrawer}
-					size="100%"
+					size='100%'
 					title={
-						<Box w="100%" h={layoutDimensions.HEADER_HEIGHT - padding * 2} p="md">
+						<Box w='100%' h={layoutDimensions.HEADER_HEIGHT - padding * 2} p='md'>
 							<Center h={'100%'}>{headerLogo}</Center>
 						</Box>
 					}
 					zIndex={100000}
 					closeButtonProps={{
-						icon: <IconX size="34" />,
+						icon: <IconX size='34' />,
 						style: {
 							backgroundColor: 'transparent',
 							color: 'var(--mantine-color-primary-6)',
 						},
 					}}
 				>
-					<ScrollArea h={`calc(100vh - ${layoutDimensions.HEADER_HEIGHT + padding}px)`} mx="-md" p={10}>
+					<ScrollArea h={`calc(100vh - ${layoutDimensions.HEADER_HEIGHT + padding}px)`} mx='-md' p={10}>
 						<HeaderMenu onMenuClick={closeDrawer} />
-						<Divider my="sm" c="primary" />
+						<Divider my='sm' c='primary' />
 						<UserMenu />
 					</ScrollArea>
 				</Drawer>
@@ -69,8 +69,8 @@ export default function Header() {
 	}, [drawerOpened, toggleDrawer, closeDrawer, headerLogo]);
 
 	return (
-		<Box h="100%">
-			<Group ps={'lg'} pe={'lg'} justify="space-between" align="end" wrap="nowrap" h="100%">
+		<Box h='100%'>
+			<Group ps={'lg'} pe={'lg'} justify='space-between' align='end' wrap='nowrap' h='100%'>
 				{headerLogo}
 				{buildHeader}
 				{buildSmallScreenHeader}

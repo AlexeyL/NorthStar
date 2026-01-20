@@ -11,23 +11,23 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { RolesModule } from '../roles/roles.module';
 
 @Module({
-  imports: [
-    PrismaModule,
-    RolesModule,
-    PassportModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
-        signOptions: {
-          expiresIn: configService.get<string>('JWT_EXPIRATION_TIME', '15m'),
-        },
-      }),
-      inject: [ConfigService],
-    }),
-  ],
-  controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy, JwtRefreshStrategy],
-  exports: [AuthService],
+	imports: [
+		PrismaModule,
+		RolesModule,
+		PassportModule,
+		JwtModule.registerAsync({
+			imports: [ConfigModule],
+			useFactory: async (configService: ConfigService) => ({
+				secret: configService.get<string>('JWT_SECRET'),
+				signOptions: {
+					expiresIn: configService.get<string>('JWT_EXPIRATION_TIME', '15m'),
+				},
+			}),
+			inject: [ConfigService],
+		}),
+	],
+	controllers: [AuthController],
+	providers: [AuthService, LocalStrategy, JwtStrategy, JwtRefreshStrategy],
+	exports: [AuthService],
 })
 export class AuthModule {}

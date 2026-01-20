@@ -37,9 +37,9 @@ export default function UserMenu() {
 					<Menu>
 						<Menu.Target>
 							<Button
-								c="primary"
-								variant="transparent"
-								rightSection={<IconTriangleInvertedFilled size={10} color="var(--mantine-color-primary-6)" />}
+								c='primary'
+								variant='transparent'
+								rightSection={<IconTriangleInvertedFilled size={10} color='var(--mantine-color-primary-6)' />}
 							>
 								{userName}
 							</Button>
@@ -48,10 +48,10 @@ export default function UserMenu() {
 						<Menu.Dropdown w={200}>
 							{userMenuItems.map((item) => (
 								<Menu.Item
-									color="var(--mantine-color-primary-6)"
+									color='var(--mantine-color-primary-6)'
 									key={item.label?.toString()}
 									onClick={item.onClick}
-									rightSection={<item.icon size={14} color="var(--mantine-color-primary-6)" />}
+									rightSection={<item.icon size={14} color='var(--mantine-color-primary-6)' />}
 								>
 									{item.label}
 								</Menu.Item>
@@ -69,7 +69,7 @@ export default function UserMenu() {
 			return (
 				<>
 					<NavLink
-						key="userMenu"
+						key='userMenu'
 						label={userName}
 						onClick={toggleLinks}
 						rightSection={
@@ -103,8 +103,8 @@ export default function UserMenu() {
 		<>
 			{user && (
 				<>
-					<Box visibleFrom="sm">{buildUserMenu(`${user.name}`)}</Box>
-					<Box hiddenFrom="sm">{buildSmallScreenUserMenu(`${user.name}`)}</Box>
+					<Box visibleFrom='sm'>{buildUserMenu(`${user.name}`)}</Box>
+					<Box hiddenFrom='sm'>{buildSmallScreenUserMenu(`${user.name}`)}</Box>
 				</>
 			)}
 		</>

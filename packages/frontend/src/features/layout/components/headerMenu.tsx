@@ -55,7 +55,7 @@ export default function HeaderMenu({ onMenuClick }: { onMenuClick?: () => void }
 		switch (item.type) {
 			case RouteItemType.MENU_HEADER:
 				return (
-					<Button key={item.title} size="compact-sm" component={RouterNavLink} to={item.path} c={menuColor} variant="transparent">
+					<Button key={item.title} size='compact-sm' component={RouterNavLink} to={item.path} c={menuColor} variant='transparent'>
 						<>{item.title}</>
 					</Button>
 				);
@@ -65,21 +65,21 @@ export default function HeaderMenu({ onMenuClick }: { onMenuClick?: () => void }
 						opened={opened}
 						onChange={setOpened}
 						withArrow
-						shadow="lg"
+						shadow='lg'
 						arrowSize={10}
 						offset={7}
 						disabled={!item.children}
 						key={item.title}
 					>
 						<PopoverTarget>
-							<Button onClick={() => setOpened((o) => !o)} size="compact-sm" c={menuColor} variant="transparent">
+							<Button onClick={() => setOpened((o) => !o)} size='compact-sm' c={menuColor} variant='transparent'>
 								<>{item.title}</>
 							</Button>
 						</PopoverTarget>
 
 						<PopoverDropdown p={0}>
 							<Stack gap={0} w={600}>
-								<Group p="md" gap={'xs'}>
+								<Group p='md' gap={'xs'}>
 									{item.icon && <item.icon color={accentColor} size={18} />}
 									<Title order={6}>
 										<>{item.title}</>
@@ -94,13 +94,13 @@ export default function HeaderMenu({ onMenuClick }: { onMenuClick?: () => void }
 
 								{item.description && (
 									<Box
-										p="xs"
+										p='xs'
 										bg={'var(--mantine-color-gray-0'}
 										style={{
 											borderTop: '1px solid var(--mantine-color-gray-3',
 										}}
 									>
-										<Text c="dimmed" size="xs">
+										<Text c='dimmed' size='xs'>
 											<>{item.description}</>
 										</Text>
 									</Box>
@@ -165,8 +165,8 @@ export default function HeaderMenu({ onMenuClick }: { onMenuClick?: () => void }
 
 	return (
 		<>
-			<Box visibleFrom="sm">{buildMenu}</Box>
-			<Box hiddenFrom="sm">{buildSmallScreenMenu}</Box>
+			<Box visibleFrom='sm'>{buildMenu}</Box>
+			<Box hiddenFrom='sm'>{buildSmallScreenMenu}</Box>
 		</>
 	);
 }

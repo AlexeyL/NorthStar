@@ -17,9 +17,7 @@ export type RouteItem =
 			type: RouteItemType.MENU_HEADER;
 			title: string;
 			description?: string;
-			icon: React.ForwardRefExoticComponent<
-				IconProps & React.RefAttributes<Icon>
-			>;
+			icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<Icon>>;
 			path: string;
 			page: React.FC;
 			isPublic: boolean;
@@ -29,9 +27,7 @@ export type RouteItem =
 	| {
 			type: RouteItemType.MENU_HEADER_WITH_CHILDREN;
 			title: string;
-			icon: React.ForwardRefExoticComponent<
-				IconProps & React.RefAttributes<Icon>
-			>;
+			icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<Icon>>;
 			description?: string;
 			children: RouteChildItem[];
 	  };

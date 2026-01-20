@@ -15,8 +15,7 @@ export const usePageRoutes = () => {
 								title: parentRoute.title,
 								isPublic: parentRoute.isPublic,
 								requiredRoles: parentRoute.requiredRoles,
-								requiredPermissions:
-									parentRoute.requiredPermissions,
+								requiredPermissions: parentRoute.requiredPermissions,
 							},
 						];
 					case RouteItemType.MENU_HEADER:
@@ -27,8 +26,7 @@ export const usePageRoutes = () => {
 								title: parentRoute.title,
 								isPublic: parentRoute.isPublic,
 								requiredRoles: parentRoute.requiredRoles,
-								requiredPermissions:
-									parentRoute.requiredPermissions,
+								requiredPermissions: parentRoute.requiredPermissions,
 							},
 						];
 					case RouteItemType.MENU_HEADER_WITH_CHILDREN:

@@ -1,13 +1,4 @@
-import {
-	Anchor,
-	Button,
-	Group,
-	Paper,
-	PasswordInput,
-	Stack,
-	TextInput,
-	Title,
-} from '@mantine/core';
+import { Anchor, Button, Group, Paper, PasswordInput, Stack, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import React from 'react';
@@ -32,12 +23,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
 			password: '',
 		},
 		validate: {
-			email: (value) =>
-				/^\S+@\S+$/.test(value) ? null : 'Invalid email',
-			password: (value) =>
-				value.length < 6
-					? 'Password must be at least 6 characters'
-					: null,
+			email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+			password: (value) => (value.length < 6 ? 'Password must be at least 6 characters' : null),
 		},
 	});
 
@@ -71,33 +58,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
 	};
 
 	return (
-		<Paper radius="md" p="xl" withBorder>
-			<Title order={2} ta="center" mb="md">
+		<Paper radius='md' p='xl' withBorder>
+			<Title order={2} ta='center' mb='md'>
 				Welcome back
 			</Title>
 
 			<form onSubmit={form.onSubmit(handleSubmit)}>
 				<Stack>
-					<TextInput
-						label="Email"
-						placeholder="your@email.com"
-						required
-						{...form.getInputProps('email')}
-					/>
+					<TextInput label='Email' placeholder='your@email.com' required {...form.getInputProps('email')} />
 
-					<PasswordInput
-						label="Password"
-						placeholder="Your password"
-						required
-						{...form.getInputProps('password')}
-					/>
+					<PasswordInput label='Password' placeholder='Your password' required {...form.getInputProps('password')} />
 
-					<Button type="submit" fullWidth loading={isLoading}>
+					<Button type='submit' fullWidth loading={isLoading}>
 						Sign in
 					</Button>
 
-					<Group justify="center">
-						<Anchor component={Link} to="/register" size="sm">
+					<Group justify='center'>
+						<Anchor component={Link} to='/register' size='sm'>
 							Don't have an account? Register
 						</Anchor>
 					</Group>

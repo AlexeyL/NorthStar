@@ -29,7 +29,7 @@ const LogoutButton: React.FC = () => {
 	};
 
 	return (
-		<Button variant="outline" onClick={handleLogout} loading={isLoading}>
+		<Button variant='outline' onClick={handleLogout} loading={isLoading}>
 			Logout
 		</Button>
 	);

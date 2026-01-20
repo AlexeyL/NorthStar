@@ -4,9 +4,7 @@ import { useSelector } from 'react-redux';
 import { AppRouter } from './features';
 
 function App() {
-	const { isAuthenticated, user } = useSelector(
-		(state: RootState) => state.auth,
-	);
+	const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
 
 	console.log('User:', user);
 	console.log('Is Authenticated:', isAuthenticated);

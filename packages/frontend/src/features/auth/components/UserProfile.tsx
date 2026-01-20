@@ -12,12 +12,12 @@ const UserProfile: React.FC = () => {
 	}
 
 	return (
-		<Paper radius="md" p="xl" withBorder>
-			<Title order={2} mb="md">
+		<Paper radius='md' p='xl' withBorder>
+			<Title order={2} mb='md'>
 				Profile
 			</Title>
 
-			<Stack gap="md">
+			<Stack gap='md'>
 				<Group>
 					<Text fw={500}>Name:</Text>
 					<Text>{user.name || 'Not provided'}</Text>
@@ -30,16 +30,14 @@ const UserProfile: React.FC = () => {
 
 				<Group>
 					<Text fw={500}>Status:</Text>
-					<Badge color={user.isActive ? 'green' : 'red'}>
-						{user.isActive ? 'Active' : 'Inactive'}
-					</Badge>
+					<Badge color={user.isActive ? 'green' : 'red'}>{user.isActive ? 'Active' : 'Inactive'}</Badge>
 				</Group>
 
 				<Group>
 					<Text fw={500}>Roles:</Text>
-					<Group gap="xs">
+					<Group gap='xs'>
 						{user.userRoles.map((userRole) => (
-							<Badge key={userRole.role.id} color="blue">
+							<Badge key={userRole.role.id} color='blue'>
 								{userRole.role.name}
 							</Badge>
 						))}
@@ -51,7 +49,7 @@ const UserProfile: React.FC = () => {
 					<Text>{new Date(user.createdAt).toLocaleDateString()}</Text>
 				</Group>
 
-				<Group mt="md">
+				<Group mt='md'>
 					<LogoutButton />
 				</Group>
 			</Stack>

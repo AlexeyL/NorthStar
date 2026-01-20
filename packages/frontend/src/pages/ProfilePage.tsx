@@ -4,7 +4,7 @@ import UserProfile from '../features/auth/components/UserProfile';
 
 const ProfilePage: React.FC = () => {
 	return (
-		<Container size="md" my={40}>
+		<Container size='md' my={40}>
 			<UserProfile />
 		</Container>
 	);

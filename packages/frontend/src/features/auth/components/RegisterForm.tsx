@@ -1,13 +1,4 @@
-import {
-	Anchor,
-	Button,
-	Group,
-	Paper,
-	PasswordInput,
-	Stack,
-	TextInput,
-	Title,
-} from '@mantine/core';
+import { Anchor, Button, Group, Paper, PasswordInput, Stack, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import React from 'react';
@@ -29,16 +20,10 @@ const RegisterForm: React.FC = () => {
 			confirmPassword: '',
 		},
 		validate: {
-			email: (value) =>
-				/^\S+@\S+$/.test(value) ? null : 'Invalid email',
-			name: (value) =>
-				value.length < 2 ? 'Name must be at least 2 characters' : null,
-			password: (value) =>
-				value.length < 6
-					? 'Password must be at least 6 characters'
-					: null,
-			confirmPassword: (value, values) =>
-				value !== values.password ? 'Passwords do not match' : null,
+			email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+			name: (value) => (value.length < 2 ? 'Name must be at least 2 characters' : null),
+			password: (value) => (value.length < 6 ? 'Password must be at least 6 characters' : null),
+			confirmPassword: (value, values) => (value !== values.password ? 'Passwords do not match' : null),
 		},
 	});
 
@@ -71,47 +56,32 @@ const RegisterForm: React.FC = () => {
 	};
 
 	return (
-		<Paper radius="md" p="xl" withBorder>
-			<Title order={2} ta="center" mb="md">
+		<Paper radius='md' p='xl' withBorder>
+			<Title order={2} ta='center' mb='md'>
 				Create account
 			</Title>
 
 			<form onSubmit={form.onSubmit(handleSubmit)}>
 				<Stack>
-					<TextInput
-						label="Email"
-						placeholder="your@email.com"
-						required
-						{...form.getInputProps('email')}
-					/>
+					<TextInput label='Email' placeholder='your@email.com' required {...form.getInputProps('email')} />
 
-					<TextInput
-						label="Name"
-						placeholder="Your name"
-						required
-						{...form.getInputProps('name')}
-					/>
+					<TextInput label='Name' placeholder='Your name' required {...form.getInputProps('name')} />
+
+					<PasswordInput label='Password' placeholder='Your password' required {...form.getInputProps('password')} />
 
 					<PasswordInput
-						label="Password"
-						placeholder="Your password"
-						required
-						{...form.getInputProps('password')}
-					/>
-
-					<PasswordInput
-						label="Confirm Password"
-						placeholder="Confirm your password"
+						label='Confirm Password'
+						placeholder='Confirm your password'
 						required
 						{...form.getInputProps('confirmPassword')}
 					/>
 
-					<Button type="submit" fullWidth loading={isLoading}>
+					<Button type='submit' fullWidth loading={isLoading}>
 						Create account
 					</Button>
 
-					<Group justify="center">
-						<Anchor component={Link} to="/login" size="sm">
+					<Group justify='center'>
+						<Anchor component={Link} to='/login' size='sm'>
 							Already have an account? Sign in
 						</Anchor>
 					</Group>

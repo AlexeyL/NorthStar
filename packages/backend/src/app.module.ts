@@ -9,17 +9,17 @@ import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-    PrismaModule,
-    AuthModule,
-    RolesModule,
-    UsersModule,
-    PostsModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [
+		ConfigModule.forRoot({
+			isGlobal: true,
+		}),
+		PrismaModule,
+		AuthModule,
+		RolesModule,
+		UsersModule,
+		PostsModule,
+	],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule {}

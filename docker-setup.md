@@ -28,6 +28,7 @@ cp .env.local .env
 ```
 
 The `.env.local` file is already configured with the correct Docker PostgreSQL connection:
+
 ```env
 DATABASE_URL="postgresql://northstar_user:northstar_password@localhost:5432/northstar_db?schema=public"
 ```
@@ -48,29 +49,34 @@ npm run dev  # Starts both backend and frontend
 
 ## Docker Commands
 
-| Command | Description |
-|---------|-------------|
-| `npm run docker:db:up` | Start PostgreSQL container |
-| `npm run docker:db:down` | Stop and remove containers |
-| `npm run docker:db:logs` | View PostgreSQL logs |
-| `npm run docker:pgadmin` | Start pgAdmin (database UI) |
-| `npm run docker:setup` | Start everything and setup database |
+| Command                  | Description                         |
+| ------------------------ | ----------------------------------- |
+| `npm run docker:db:up`   | Start PostgreSQL container          |
+| `npm run docker:db:down` | Stop and remove containers          |
+| `npm run docker:db:logs` | View PostgreSQL logs                |
+| `npm run docker:pgadmin` | Start pgAdmin (database UI)         |
+| `npm run docker:setup`   | Start everything and setup database |
 
 ## Database Management
 
 ### Using Prisma Studio (Recommended)
+
 ```bash
 npm run db:studio
 ```
+
 Opens at: http://localhost:5555
 
 ### Using pgAdmin (Optional)
+
 If you started pgAdmin with `npm run docker:pgadmin`:
+
 - URL: http://localhost:5050
 - Email: admin@northstar.local
 - Password: admin123
 
 To connect to the database in pgAdmin:
+
 - Host: postgres (or localhost if connecting from outside Docker)
 - Port: 5432
 - Database: northstar_db
@@ -80,6 +86,7 @@ To connect to the database in pgAdmin:
 ## Database Configuration
 
 The Docker setup creates:
+
 - **Database**: northstar_db
 - **User**: northstar_user
 - **Password**: northstar_password
@@ -88,7 +95,9 @@ The Docker setup creates:
 ## Troubleshooting
 
 ### Port 5432 already in use
+
 If you have PostgreSQL installed locally, stop it first:
+
 ```bash
 # macOS with Homebrew
 brew services stop postgresql
@@ -99,19 +108,23 @@ ports:
 ```
 
 ### Database connection issues
+
 1. Make sure Docker containers are running:
-   ```bash
-   docker-compose ps
-   ```
+
+    ```bash
+    docker-compose ps
+    ```
 
 2. Check container logs:
-   ```bash
-   npm run docker:db:logs
-   ```
+
+    ```bash
+    npm run docker:db:logs
+    ```
 
 3. Verify your `.env` file has the correct DATABASE_URL
 
 ### Reset database
+
 ```bash
 npm run docker:db:down  # Stop containers
 docker volume rm northstar_postgres_data  # Remove data
