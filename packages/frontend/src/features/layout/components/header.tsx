@@ -7,14 +7,15 @@ import { useMemo } from 'react';
 
 export default function Header() {
 	const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+	const backgroundColor = 'var(--mantine-color-primary-6)';
 	const padding = 16;
 
 	const headerLogo = useMemo(() => {
 		return (
-			<Anchor href='/' style={{ cursor: 'pointer', textDecoration: 'none' }}>
+			<Anchor href='/' style={{ cursor: 'pointer', textDecoration: 'none' }} ml={20}>
 				<Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 					<Image src={logo} alt='Aptivor logo' height={50} />
-					<Text c='primary'>Aptivor</Text>
+					<Text c='white'>Aptivor</Text>
 				</Box>
 			</Anchor>
 		);
@@ -37,7 +38,7 @@ export default function Header() {
 		return (
 			<>
 				<Center h='100%' hiddenFrom='sm'>
-					<Burger color='primary' opened={drawerOpened} onClick={toggleDrawer} />
+					<Burger color='white' opened={drawerOpened} onClick={toggleDrawer} />
 				</Center>
 				<Drawer
 					hiddenFrom='sm'
@@ -51,11 +52,15 @@ export default function Header() {
 					}
 					zIndex={100000}
 					closeButtonProps={{
-						icon: <IconX size='34' />,
+						icon: <IconX size='36' />,
 						style: {
 							backgroundColor: 'transparent',
-							color: 'var(--mantine-color-primary-6)',
+							color: 'var(--mantine-color-white)',
+							marginRight: 10,
 						},
+					}}
+					styles={{
+						header: { backgroundColor: backgroundColor },
 					}}
 				>
 					<ScrollArea h={`calc(100vh - ${layoutDimensions.HEADER_HEIGHT + padding}px)`} mx='-md' p={10}>
@@ -69,9 +74,11 @@ export default function Header() {
 	}, [drawerOpened, toggleDrawer, closeDrawer, headerLogo]);
 
 	return (
-		<Box h='100%'>
+		<Box h='100%' bg={backgroundColor}>
 			<Group ps={'lg'} pe={'lg'} justify='space-between' align='end' wrap='nowrap' h='100%'>
-				{headerLogo}
+				<Box component='span' h={layoutDimensions.HEADER_HEIGHT} ml={10}>
+					<Center h={'100%'}>{headerLogo}</Center>
+				</Box>
 				{buildHeader}
 				{buildSmallScreenHeader}
 			</Group>

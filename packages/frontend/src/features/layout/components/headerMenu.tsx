@@ -24,7 +24,7 @@ export default function HeaderMenu({ onMenuClick }: { onMenuClick?: () => void }
 	const [opened, setOpened] = useState(false);
 	const theme = useMantineTheme();
 	const accentColor = theme.colors.accent[6];
-	const menuColor = theme.colors.primary[6];
+	const menuColor = 'var(--mantine-color-white)';
 	const menuRoutes = useMenuRoutes();
 	const [openLinks, setOpenLinks] = useState<{ [key: string]: boolean }>({});
 
