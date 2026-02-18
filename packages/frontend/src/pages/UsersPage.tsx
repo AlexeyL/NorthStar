@@ -4,8 +4,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import { IconAlertCircle, IconEdit, IconPlus, IconTrash } from '@tabler/icons-react';
 import { useState } from 'react';
-import { useCreateUserMutation, useDeleteUserMutation, useGetUsersQuery, useUpdateUserMutation } from '../api/apiSlice';
-import type { CreateUserDto, User } from '../types';
+import type { User } from '@features/auth';
+import { useCreateUserMutation, useDeleteUserMutation, useGetUsersQuery, useUpdateUserMutation, type CreateUserDto } from '@features/user';
 
 export default function UsersPage() {
 	const [opened, { open, close }] = useDisclosure(false);

@@ -1,15 +1,13 @@
 import { configureStore, type Action, type ThunkAction } from '@reduxjs/toolkit';
-import { apiSlice } from '../api/apiSlice';
-import { authApi } from '../api/authApi';
-import authReducer from './authSlice';
+import { apiSlice } from '@api/apiSlice';
+import authReducer from '@features/auth/slices/authSlice';
 
 export const store = configureStore({
 	reducer: {
-		api: apiSlice.reducer,
-		authApi: authApi.reducer,
+		[apiSlice.reducerPath]: apiSlice.reducer,
 		auth: authReducer,
 	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware, authApi.middleware),
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 // Infer the type of `store`

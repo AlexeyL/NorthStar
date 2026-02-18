@@ -1,5 +1,5 @@
+import type { AuthState, User } from '@features/auth';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { type AuthState, type User } from '../types/auth';
 
 // Helper function to get initial state from localStorage
 const getInitialState = (): AuthState => {
@@ -86,5 +86,4 @@ const authSlice = createSlice({
 });
 
 export const { setCredentials, clearCredentials, setError, clearError, setLoading, updateUser } = authSlice.actions;
-
 export default authSlice.reducer;

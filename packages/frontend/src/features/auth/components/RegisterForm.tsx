@@ -4,8 +4,7 @@ import { notifications } from '@mantine/notifications';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRegisterMutation } from '../../../api/authApi';
-import { setCredentials } from '../../../store/authSlice';
+import { setCredentials, useRegisterMutation } from '@features/index';
 
 const RegisterForm: React.FC = () => {
 	const [register, { isLoading }] = useRegisterMutation();

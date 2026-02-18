@@ -1,3 +1,5 @@
+import { useCreatePostMutation, useDeletePostMutation, useGetPostsQuery, useUpdatePostMutation, type CreatePostDto, type Post } from '@features/post';
+import { useGetUsersQuery } from '@features/user';
 import {
 	ActionIcon,
 	Alert,
@@ -21,8 +23,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import { IconAlertCircle, IconEdit, IconPlus, IconTrash } from '@tabler/icons-react';
 import { useState } from 'react';
-import { useCreatePostMutation, useDeletePostMutation, useGetPostsQuery, useGetUsersQuery, useUpdatePostMutation } from '../api/apiSlice';
-import type { CreatePostDto, Post } from '../types';
 
 export default function PostsPage() {
 	const [opened, { open, close }] = useDisclosure(false);

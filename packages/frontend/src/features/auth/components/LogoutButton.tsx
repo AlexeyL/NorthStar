@@ -3,8 +3,7 @@ import { notifications } from '@mantine/notifications';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useLogoutMutation } from '../../../api/authApi';
-import { clearCredentials } from '../../../store/authSlice';
+import { clearCredentials, useLogoutMutation } from '@features/index';
 
 const LogoutButton: React.FC = () => {
 	const [logout, { isLoading }] = useLogoutMutation();

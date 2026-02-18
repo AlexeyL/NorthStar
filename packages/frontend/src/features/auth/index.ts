@@ -1,4 +1,14 @@
 export { default as LoginForm } from './components/LoginForm';
 export { default as LogoutButton } from './components/LogoutButton';
 export { default as RegisterForm } from './components/RegisterForm';
+export * from './services/auth.service';
+export * from './types/authResponse.type';
+export * from '../user/types/user.type';
+export * from './types/loginRequest.type';
+export * from './types/registerRequest.type';
+export * from './types/refreshTokenRequest.type';
+export * from './types/authState.type';
+export * from './types/jwtPayload.type';
+export * from './slices/authApiSlice';
+export * from './slices/authSlice';
 export { default as UserProfile } from './components/UserProfile';

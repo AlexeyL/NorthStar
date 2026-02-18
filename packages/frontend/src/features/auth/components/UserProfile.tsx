@@ -1,8 +1,8 @@
 import { Badge, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { type RootState } from '../../../store/store';
 import LogoutButton from './LogoutButton';
+import type { RootState } from '@store/store';
 
 const UserProfile: React.FC = () => {
 	const { user } = useSelector((state: RootState) => state.auth);

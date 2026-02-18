@@ -27,7 +27,8 @@
 			"@utils": ["utils/index.ts"],
 			"@api/*": ["api/*"],
 			"@store/*": ["store/*"],
-			"@assets/*": ["assets/*"]
+			"@assets/*": ["assets/*"],
+			"@constants/*": ["constants/*"]
 		}
 	},
 	"include": ["src"]

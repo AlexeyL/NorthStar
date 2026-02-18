@@ -1,93 +1,16 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { User, Post, CreateUserDto, UpdateUserDto, CreatePostDto, UpdatePostDto } from '../types';
+// Import the RTK Query methods from the React-specific entry point
+import { RTKTagTypes } from '@constants/rtkTags';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { appBaseQuery } from './appBaseQuery';
 
+// Define our single API slice object
 export const apiSlice = createApi({
+	// The cache reducer expects to be added at `state.api` (already default - this is optional)
 	reducerPath: 'api',
-	baseQuery: fetchBaseQuery({
-		baseUrl: '/api',
-	}),
-	tagTypes: ['User', 'Post'],
-	endpoints: (builder) => ({
-		// Users endpoints
-		getUsers: builder.query<User[], void>({
-			query: () => '/users',
-			providesTags: ['User'],
-		}),
-		getUser: builder.query<User, string>({
-			query: (id) => `/users/${id}`,
-			providesTags: (result, error, id) => [{ type: 'User', id }],
-		}),
-		createUser: builder.mutation<User, CreateUserDto>({
-			query: (userData) => ({
-				url: '/users',
-				method: 'POST',
-				body: userData,
-			}),
-			invalidatesTags: ['User'],
-		}),
-		updateUser: builder.mutation<User, { id: string; userData: UpdateUserDto }>({
-			query: ({ id, userData }) => ({
-				url: `/users/${id}`,
-				method: 'PATCH',
-				body: userData,
-			}),
-			invalidatesTags: (result, error, { id }) => [{ type: 'User', id }],
-		}),
-		deleteUser: builder.mutation<void, string>({
-			query: (id) => ({
-				url: `/users/${id}`,
-				method: 'DELETE',
-			}),
-			invalidatesTags: ['User'],
-		}),
-
-		// Posts endpoints
-		getPosts: builder.query<Post[], string | void>({
-			query: (authorId) => ({
-				url: '/posts',
-				params: authorId ? { authorId } : undefined,
-			}),
-			providesTags: ['Post'],
-		}),
-		getPost: builder.query<Post, string>({
-			query: (id) => `/posts/${id}`,
-			providesTags: (result, error, id) => [{ type: 'Post', id }],
-		}),
-		createPost: builder.mutation<Post, CreatePostDto>({
-			query: (postData) => ({
-				url: '/posts',
-				method: 'POST',
-				body: postData,
-			}),
-			invalidatesTags: ['Post'],
-		}),
-		updatePost: builder.mutation<Post, { id: string; postData: UpdatePostDto }>({
-			query: ({ id, postData }) => ({
-				url: `/posts/${id}`,
-				method: 'PATCH',
-				body: postData,
-			}),
-			invalidatesTags: (result, error, { id }) => [{ type: 'Post', id }],
-		}),
-		deletePost: builder.mutation<void, string>({
-			query: (id) => ({
-				url: `/posts/${id}`,
-				method: 'DELETE',
-			}),
-			invalidatesTags: ['Post'],
-		}),
-	}),
+	// All of our requests will have URLs starting with base api URL
+	baseQuery: appBaseQuery(),
+	// The "tagTypes" are used for invalidation and refetching
+	tagTypes: RTKTagTypes,
+	// The "endpoints" represent operations and requests for this server are implemented in its own slices
+	endpoints: () => ({}),
 });
-
-export const {
-	useGetUsersQuery,
-	useGetUserQuery,
-	useCreateUserMutation,
-	useUpdateUserMutation,
-	useDeleteUserMutation,
-	useGetPostsQuery,
-	useGetPostQuery,
-	useCreatePostMutation,
-	useUpdatePostMutation,
-	useDeletePostMutation,
-} = apiSlice;

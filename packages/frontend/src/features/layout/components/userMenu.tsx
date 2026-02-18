@@ -1,6 +1,6 @@
 import { Box, Button, Collapse, Menu, NavLink, useMantineTheme } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { clearCredentials } from '@store/authSlice';
+import { clearCredentials } from '@features/auth/slices/authSlice';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { IconChevronDown, IconLogout, IconTriangleInvertedFilled } from '@tabler/icons-react';
 import { useCallback, useMemo } from 'react';
