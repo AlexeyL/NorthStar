@@ -37,9 +37,9 @@ export default function UserMenu() {
 					<Menu>
 						<Menu.Target>
 							<Button
-								c='primary'
+								c='white'
 								variant='transparent'
-								rightSection={<IconTriangleInvertedFilled size={10} color='var(--mantine-color-primary-6)' />}
+								rightSection={<IconTriangleInvertedFilled size={10} color='var(--mantine-color-white)' />}
 							>
 								{userName}
 							</Button>

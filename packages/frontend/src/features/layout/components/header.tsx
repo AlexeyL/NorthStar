@@ -1,87 +1,54 @@
-import logo from '@assets/logo.png';
 import { HeaderMenu, layoutDimensions, UserMenu } from '@features';
-import { Anchor, Box, Burger, Center, Divider, Drawer, Group, Image, ScrollArea, Text } from '@mantine/core';
+import { Box, Burger, Container, Divider, Drawer, Group, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconX } from '@tabler/icons-react';
-import { useMemo } from 'react';
+import Logo from './logo';
 
 export default function Header() {
 	const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-	const backgroundColor = 'var(--mantine-color-primary-6)';
-	const padding = 16;
-
-	const headerLogo = useMemo(() => {
-		return (
-			<Anchor href='/' style={{ cursor: 'pointer', textDecoration: 'none' }} ml={20}>
-				<Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-					<Image src={logo} alt='Aptivor logo' height={50} />
-					<Text c='white'>Aptivor</Text>
-				</Box>
-			</Anchor>
-		);
-	}, []);
-
-	const buildHeader = useMemo(() => {
-		return (
-			<>
-				<Group pb={'sm'} gap={'xs'} visibleFrom='sm'>
-					<HeaderMenu />
-				</Group>
-				<Box pb={'sm'} visibleFrom='sm'>
-					<UserMenu />
-				</Box>
-			</>
-		);
-	}, []);
-
-	const buildSmallScreenHeader = useMemo(() => {
-		return (
-			<>
-				<Center h='100%' hiddenFrom='sm'>
-					<Burger color='white' opened={drawerOpened} onClick={toggleDrawer} />
-				</Center>
-				<Drawer
-					hiddenFrom='sm'
-					opened={drawerOpened}
-					onClose={closeDrawer}
-					size='100%'
-					title={
-						<Box w='100%' h={layoutDimensions.HEADER_HEIGHT - padding * 2} p='md'>
-							<Center h={'100%'}>{headerLogo}</Center>
-						</Box>
-					}
-					zIndex={100000}
-					closeButtonProps={{
-						icon: <IconX size='36' />,
-						style: {
-							backgroundColor: 'transparent',
-							color: 'var(--mantine-color-white)',
-							marginRight: 10,
-						},
-					}}
-					styles={{
-						header: { backgroundColor: backgroundColor },
-					}}
-				>
-					<ScrollArea h={`calc(100vh - ${layoutDimensions.HEADER_HEIGHT + padding}px)`} mx='-md' p={10}>
-						<HeaderMenu onMenuClick={closeDrawer} />
-						<Divider my='sm' c='primary' />
-						<UserMenu />
-					</ScrollArea>
-				</Drawer>
-			</>
-		);
-	}, [drawerOpened, toggleDrawer, closeDrawer, headerLogo]);
 
 	return (
-		<Box h='100%' bg={backgroundColor}>
-			<Group ps={'lg'} pe={'lg'} justify='space-between' align='end' wrap='nowrap' h='100%'>
-				<Box component='span' h={layoutDimensions.HEADER_HEIGHT} ml={10}>
-					<Center h={'100%'}>{headerLogo}</Center>
-				</Box>
-				{buildHeader}
-				{buildSmallScreenHeader}
-			</Group>
+		<Box h='100%' bg='var(--mantine-color-primary-6)'>
+			<Container size='xl' h='100%'>
+				<Group justify='space-between' align='center' h='100%' wrap='nowrap'>
+					<Logo />
+
+					<Group gap='xs' visibleFrom='sm' align='center'>
+						<HeaderMenu />
+						<UserMenu />
+					</Group>
+
+					<Burger color='white' opened={drawerOpened} onClick={toggleDrawer} hiddenFrom='sm' />
+				</Group>
+			</Container>
+
+			<Drawer
+				opened={drawerOpened}
+				onClose={closeDrawer}
+				size='100%'
+				title={<Logo />}
+				zIndex={100000}
+				closeButtonProps={{
+					icon: <IconX size={36} />,
+					style: {
+						backgroundColor: 'transparent',
+						color: 'var(--mantine-color-white)',
+						marginRight: 10,
+					},
+				}}
+				styles={{
+					header: {
+						backgroundColor: 'var(--mantine-color-primary-6)',
+						minHeight: layoutDimensions.HEADER_HEIGHT,
+					},
+				}}
+			>
+				<ScrollArea h={`calc(100dvh - ${layoutDimensions.HEADER_HEIGHT}px)`} mx='-md' px='md'>
+					<HeaderMenu onMenuClick={closeDrawer} />
+					<Divider my='sm' />
+					<UserMenu />
+				</ScrollArea>
+			</Drawer>
 		</Box>
 	);
 }
