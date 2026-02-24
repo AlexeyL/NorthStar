@@ -46,9 +46,8 @@ export default function HeaderMenu({ onMenuClick }: { onMenuClick?: () => void }
 				description={<>{child.description ?? ''}</>}
 				leftSection={child.icon && <child.icon color={accentColor} />}
 			/>
-			// eslint-disable-next-line react-hooks/exhaustive-deps
 		),
-		[],
+		[accentColor],
 	);
 
 	const buildMenu = menuRoutes.map((item) => {
