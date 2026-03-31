@@ -1,11 +1,12 @@
+import { US_STATES } from '@constants/states';
+import type { RegisterRequest } from '@features/index';
 import { setCredentials, useRegisterMutation } from '@features/index';
-import { Anchor, Button, Group, Paper, PasswordInput, Stack, Stepper, TextInput, Title } from '@mantine/core';
+import { Anchor, Button, Group, Paper, PasswordInput, Select, Stack, Stepper, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import type { RegisterRequest } from '@features/index';
 
 const STEP1_FIELDS = ['firstName', 'lastName', 'email', 'password', 'confirmPassword'] as const;
 
@@ -87,8 +88,8 @@ const RegisterForm: React.FC = () => {
 				{activeStep === 0 && (
 					<Stack>
 						<Group grow>
-							<TextInput label='First Name' placeholder='John' required {...form.getInputProps('firstName')} />
-							<TextInput label='Last Name' placeholder='Doe' required {...form.getInputProps('lastName')} />
+							<TextInput label='First Name' placeholder='First Name' required {...form.getInputProps('firstName')} />
+							<TextInput label='Last Name' placeholder='Last Name' required {...form.getInputProps('lastName')} />
 						</Group>
 						<TextInput label='Email' placeholder='your@email.com' required {...form.getInputProps('email')} />
 						<PasswordInput label='Password' placeholder='Your password' required {...form.getInputProps('password')} />
@@ -111,13 +112,20 @@ const RegisterForm: React.FC = () => {
 
 				{activeStep === 1 && (
 					<Stack>
-						<TextInput label='Company Name' placeholder='Acme Corp' required {...form.getInputProps('companyName')} />
-						<TextInput label='Phone' placeholder='+1 555 000 0000' required {...form.getInputProps('phone')} />
-						<TextInput label='Address' placeholder='123 Main St' required {...form.getInputProps('address')} />
+						<TextInput label='Company Name' placeholder='Company Name' required {...form.getInputProps('companyName')} />
+						<TextInput label='Phone' placeholder='Phone' required {...form.getInputProps('phone')} />
+						<TextInput label='Address' placeholder='Address' required {...form.getInputProps('address')} />
 						<Group grow>
-							<TextInput label='City' placeholder='Springfield' required {...form.getInputProps('city')} />
-							<TextInput label='State' placeholder='IL' required {...form.getInputProps('state')} />
-							<TextInput label='ZIP' placeholder='62701' required {...form.getInputProps('zip')} />
+							<TextInput label='City' placeholder='City' required {...form.getInputProps('city')} />
+							<Select
+								label='State'
+								placeholder='State'
+								required
+								searchable
+								data={US_STATES}
+								{...form.getInputProps('state')}
+							/>
+							<TextInput label='ZIP' placeholder='ZIP' required {...form.getInputProps('zip')} />
 						</Group>
 						<Group grow>
 							<Button type='button' variant='default' onClick={() => setActiveStep(0)}>
