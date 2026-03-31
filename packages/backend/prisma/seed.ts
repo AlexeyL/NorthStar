@@ -11,6 +11,7 @@ async function main() {
 		{ name: 'admin', description: 'Administrator with full access' },
 		{ name: 'user', description: 'Regular user with basic access' },
 		{ name: 'moderator', description: 'Moderator with content management access' },
+		{ name: 'company_admin', description: 'Administrator of a company with full user and content management access' },
 	];
 
 	for (const role of roles) {
@@ -53,6 +54,7 @@ async function main() {
 	const adminRole = await prisma.role.findUnique({ where: { name: 'admin' } });
 	const userRole = await prisma.role.findUnique({ where: { name: 'user' } });
 	const moderatorRole = await prisma.role.findUnique({ where: { name: 'moderator' } });
+	const companyAdminRole = await prisma.role.findUnique({ where: { name: 'company_admin' } });
 
 	const allPermissions = await prisma.permission.findMany();
 	const userPermissions = await prisma.permission.findMany({
@@ -66,6 +68,13 @@ async function main() {
 		where: {
 			name: {
 				in: ['users:read', 'posts:read', 'posts:create', 'posts:update', 'posts:delete'],
+			},
+		},
+	});
+	const companyAdminPermissions = await prisma.permission.findMany({
+		where: {
+			name: {
+				in: ['users:read', 'users:create', 'users:update', 'users:delete', 'posts:read', 'posts:create', 'posts:update', 'posts:delete'],
 			},
 		},
 	});
@@ -119,6 +128,24 @@ async function main() {
 				update: {},
 				create: {
 					roleId: moderatorRole.id,
+					permissionId: permission.id,
+				},
+			});
+		}
+	}
+
+	if (companyAdminRole && companyAdminPermissions.length > 0) {
+		for (const permission of companyAdminPermissions) {
+			await prisma.rolePermission.upsert({
+				where: {
+					roleId_permissionId: {
+						roleId: companyAdminRole.id,
+						permissionId: permission.id,
+					},
+				},
+				update: {},
+				create: {
+					roleId: companyAdminRole.id,
 					permissionId: permission.id,
 				},
 			});

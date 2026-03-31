@@ -119,8 +119,8 @@ export class AuthService {
 			});
 		});
 
-		// Assign default role to new user (outside transaction — safe after user exists)
-		await this.rolesService.assignRoleToUser(user.id, 'user');
+		// Assign company_admin role to the new user (outside transaction — safe after user exists)
+		await this.rolesService.assignRoleToUser(user.id, 'company_admin');
 
 		const tokens = await this.generateTokens(user);
 		await this.updateRefreshToken(user.id, tokens.refreshToken);
