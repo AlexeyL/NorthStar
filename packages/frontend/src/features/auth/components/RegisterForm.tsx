@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 const STEP1_FIELDS = ['firstName', 'lastName', 'email', 'password', 'confirmPassword'] as const;
+const STEP2_FIELDS = ['companyName', 'phone', 'address', 'city', 'state', 'zip'] as const;
 
 const RegisterForm: React.FC = () => {
 	const [register, { isLoading }] = useRegisterMutation();
@@ -46,8 +47,13 @@ const RegisterForm: React.FC = () => {
 	});
 
 	const handleNext = () => {
-		const hasErrors = STEP1_FIELDS.some((field) => form.validateField(field).hasError);
-		if (!hasErrors) setActiveStep(1);
+		const results = STEP1_FIELDS.map((field) => form.validateField(field));
+		if (results.every((r) => !r.hasError)) setActiveStep(1);
+	};
+
+	const handleCreateAccount = () => {
+		const results = STEP2_FIELDS.map((field) => form.validateField(field));
+		if (results.every((r) => !r.hasError)) form.onSubmit(handleSubmit)();
 	};
 
 	const handleSubmit = async (values: typeof form.values) => {
@@ -131,7 +137,7 @@ const RegisterForm: React.FC = () => {
 							<Button type='button' variant='default' onClick={() => setActiveStep(0)}>
 								Back
 							</Button>
-							<Button type='submit' loading={isLoading}>
+							<Button type='button' loading={isLoading} onClick={handleCreateAccount}>
 								Create Account
 							</Button>
 						</Group>
