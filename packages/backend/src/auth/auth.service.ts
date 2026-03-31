@@ -76,30 +76,50 @@ export class AuthService {
 
 		const hashedPassword = await bcrypt.hash(registerDto.password, 12);
 
-		const user = await this.prisma.user.create({
-			data: {
-				email: registerDto.email,
-				name: registerDto.name,
-				password: hashedPassword,
-			},
-			include: {
-				userRoles: {
-					include: {
-						role: {
-							include: {
-								rolePermissions: {
-									include: {
-										permission: true,
+		const user = await this.prisma.$transaction(async (tx) => {
+			const company = await tx.company.create({
+				data: { name: registerDto.companyName },
+			});
+
+			await tx.companyLocation.create({
+				data: {
+					companyId: company.id,
+					phone: registerDto.phone,
+					address: registerDto.address,
+					city: registerDto.city,
+					state: registerDto.state,
+					zip: registerDto.zip,
+					isMain: true,
+				},
+			});
+
+			return tx.user.create({
+				data: {
+					email: registerDto.email,
+					firstName: registerDto.firstName,
+					lastName: registerDto.lastName,
+					password: hashedPassword,
+					companyId: company.id,
+				},
+				include: {
+					userRoles: {
+						include: {
+							role: {
+								include: {
+									rolePermissions: {
+										include: {
+											permission: true,
+										},
 									},
 								},
 							},
 						},
 					},
 				},
-			},
+			});
 		});
 
-		// Assign default role to new user
+		// Assign default role to new user (outside transaction — safe after user exists)
 		await this.rolesService.assignRoleToUser(user.id, 'user');
 
 		const tokens = await this.generateTokens(user);

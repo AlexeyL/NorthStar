@@ -132,7 +132,8 @@ async function main() {
 		update: {},
 		create: {
 			email: 'admin@example.com',
-			name: 'Admin User',
+			firstName: 'Admin',
+			lastName: 'User',
 			password: hashedPassword,
 		},
 	});
@@ -161,7 +162,8 @@ async function main() {
 		update: {},
 		create: {
 			email: 'alice@example.com',
-			name: 'Alice Johnson',
+			firstName: 'Alice',
+			lastName: 'Johnson',
 			password: user1Password,
 			posts: {
 				create: [
@@ -186,7 +188,8 @@ async function main() {
 		update: {},
 		create: {
 			email: 'bob@example.com',
-			name: 'Bob Smith',
+			firstName: 'Bob',
+			lastName: 'Smith',
 			password: user2Password,
 			posts: {
 				create: [

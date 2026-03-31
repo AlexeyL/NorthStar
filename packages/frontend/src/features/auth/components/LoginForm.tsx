@@ -1,8 +1,8 @@
+import { setCredentials } from '@features/auth/slices/authSlice';
 import { useLoginMutation } from '@features/index';
 import { Anchor, Button, Group, Paper, PasswordInput, Stack, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-import { setCredentials } from '@features/auth/slices/authSlice';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ interface LoginFormProps {
 	onSwitchToRegister?: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
+const LoginForm: React.FC<LoginFormProps> = () => {
 	const [login, { isLoading }] = useLoginMutation();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

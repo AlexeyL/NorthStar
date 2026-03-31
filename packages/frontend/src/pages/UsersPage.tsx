@@ -19,7 +19,8 @@ export default function UsersPage() {
 	const form = useForm<CreateUserDto>({
 		initialValues: {
 			email: '',
-			name: '',
+			firstName: '',
+			lastName: '',
 		},
 		validate: {
 			email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
@@ -62,7 +63,8 @@ export default function UsersPage() {
 		setEditingUser(user);
 		form.setValues({
 			email: user.email,
-			name: user.name || '',
+			firstName: user.firstName || '',
+			lastName: user.lastName || '',
 		});
 		open();
 	};
@@ -124,7 +126,7 @@ export default function UsersPage() {
 						<Table.Tbody>
 							{users.map((user) => (
 								<Table.Tr key={user.id}>
-									<Table.Td>{user.name || 'N/A'}</Table.Td>
+									<Table.Td>{[user.firstName, user.lastName].filter(Boolean).join(' ') || 'N/A'}</Table.Td>
 									<Table.Td>{user.email}</Table.Td>
 									<Table.Td>{user.posts?.length || 0}</Table.Td>
 									<Table.Td>
@@ -149,7 +151,8 @@ export default function UsersPage() {
 			<Modal opened={opened} onClose={close} title={editingUser ? 'Edit User' : 'Create User'}>
 				<form onSubmit={form.onSubmit(handleSubmit)}>
 					<TextInput label='Email' placeholder='user@example.com' {...form.getInputProps('email')} mb='md' required />
-					<TextInput label='Name' placeholder='John Doe' {...form.getInputProps('name')} mb='md' />
+					<TextInput label='First Name' placeholder='John' {...form.getInputProps('firstName')} mb='md' />
+				<TextInput label='Last Name' placeholder='Doe' {...form.getInputProps('lastName')} mb='md' />
 					<Group justify='flex-end'>
 						<Button variant='light' onClick={close}>
 							Cancel

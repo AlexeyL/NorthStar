@@ -103,8 +103,8 @@ export default function UserMenu() {
 		<>
 			{user && (
 				<>
-					<Box visibleFrom='sm'>{buildUserMenu(`${user.name}`)}</Box>
-					<Box hiddenFrom='sm'>{buildSmallScreenUserMenu(`${user.name}`)}</Box>
+					<Box visibleFrom='sm'>{buildUserMenu(`${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() || user.email)}</Box>
+					<Box hiddenFrom='sm'>{buildSmallScreenUserMenu(`${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() || user.email)}</Box>
 				</>
 			)}
 		</>

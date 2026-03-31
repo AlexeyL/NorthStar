@@ -116,7 +116,7 @@ export default function PostsPage() {
 	const userOptions =
 		users?.map((user) => ({
 			value: user.id,
-			label: user.name || user.email,
+			label: [user.firstName, user.lastName].filter(Boolean).join(' ') || user.email,
 		})) || [];
 
 	if (error) {
@@ -154,7 +154,7 @@ export default function PostsPage() {
 							</Group>
 
 							<Text size='sm' c='dimmed' mb='md'>
-								By {post.author?.name || post.author?.email}
+								By {[post.author?.firstName, post.author?.lastName].filter(Boolean).join(' ') || post.author?.email}
 							</Text>
 
 							{post.content && (

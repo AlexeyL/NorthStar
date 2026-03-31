@@ -20,7 +20,7 @@ const UserProfile: React.FC = () => {
 			<Stack gap='md'>
 				<Group>
 					<Text fw={500}>Name:</Text>
-					<Text>{user.name || 'Not provided'}</Text>
+					<Text>{[user.firstName, user.lastName].filter(Boolean).join(' ') || 'Not provided'}</Text>
 				</Group>
 
 				<Group>

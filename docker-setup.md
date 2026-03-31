@@ -74,6 +74,7 @@ If you started pgAdmin with `npm run docker:pgadmin`:
 - URL: http://localhost:5050
 - Email: admin@northstar.local
 - Password: admin123
+- Master Password: Welcome@2pgadmin
 
 To connect to the database in pgAdmin:
 

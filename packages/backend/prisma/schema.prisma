@@ -11,18 +11,48 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  name         String?
+  id           String    @id @default(cuid())
+  email        String    @unique
+  firstName    String?
+  lastName     String?
   password     String
-  isActive     Boolean  @default(true)
+  isActive     Boolean   @default(true)
   refreshToken String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  companyId    String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  company      Company?  @relation(fields: [companyId], references: [id])
   posts        Post[]
   userRoles    UserRole[]
 
   @@map("users")
+}
+
+model Company {
+  id        String            @id @default(cuid())
+  name      String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  users     User[]
+  locations CompanyLocation[]
+
+  @@map("companies")
+}
+
+model CompanyLocation {
+  id        String   @id @default(cuid())
+  companyId String
+  phone     String
+  address   String
+  city      String
+  state     String
+  zip       String
+  isMain    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("company_locations")
 }
 
 model Role {

@@ -2,8 +2,10 @@ export interface AuthResponse {
 	user: {
 		id: string;
 		email: string;
-		name?: string;
+		firstName?: string;
+		lastName?: string;
 		isActive: boolean;
+		companyId?: string;
 		createdAt: Date;
 		updatedAt: Date;
 		userRoles: Array<{
