@@ -144,7 +144,7 @@ export default function HeaderMenu({ onMenuClick }: { onMenuClick?: () => void }
 								/>
 							}
 						/>
-						<Collapse in={!!openLinks[item.title]}>
+						<Collapse expanded={!!openLinks[item.title]}>
 							{item.children?.map((child) => (
 								<NavLink
 									key={child.title}

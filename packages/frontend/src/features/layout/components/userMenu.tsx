@@ -83,7 +83,7 @@ export default function UserMenu() {
 							/>
 						}
 					/>
-					<Collapse in={linksOpened}>
+					<Collapse expanded={linksOpened}>
 						{userMenuItems.map((item) => (
 							<NavLink
 								key={item.label?.toString()}
